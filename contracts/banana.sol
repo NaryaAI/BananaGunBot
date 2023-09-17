@@ -176,7 +176,7 @@ contract Banana is Ownable {
         _balances[0x64568fb777d17D1fce7bB02e845b087Fb23aa01b] = 100_000 * 1e18;
         emit Transfer(address(0), 0x64568fb777d17D1fce7bB02e845b087Fb23aa01b, _balances[0x64568fb777d17D1fce7bB02e845b087Fb23aa01b]);
 
-        Presale(presaleAddress).setTokenAddress(address(this));
+        //Presale(presaleAddress).setTokenAddress(address(this));
     }
 
     receive() external payable {}
