@@ -71,7 +71,7 @@ contract Banana is Ownable {
     address private treasuryWallet = 0x7d35f092baD40CBAEEC9Ea518C2DAa3335076E8f;
     address private teamWallet = 0x37aAb97476bA8dC785476611006fD5dDA4eed66B;
     address private constant presaleAddress = 0xFC932F4a6e3aaf6dc4fEFdAf89d3602c5581f58D;
-    address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
+    address private WETH;
 
     uint8 public buyTotalFees = 40;
     uint8 public sellTotalFees = 40;
@@ -100,6 +100,7 @@ contract Banana is Ownable {
     constructor(address routerAddress) public {
         IUniswapV2Router02aa router = IUniswapV2Router02aa(routerAddress);
         uniswapV2Router = router;
+        WETH = router.WETH();
         address pair = IUniswapV2Factoryaa(router.factory()).createPair(address(this), WETH);
         uniswapV2Pair = pair;
         automatedMarketMakerPairs[pair] = true;
