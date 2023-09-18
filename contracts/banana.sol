@@ -35,7 +35,7 @@ abstract contract Ownable {
     }
 }
 
-interface IERC20 {
+interface IERC20aa {
     function balanceOf(address account) external view returns (uint256);
     function transfer(address recipient, uint256 amount) external;
 }
@@ -44,11 +44,11 @@ interface Presale {
     function setTokenAddress(address tokenNew) external;
 }
 
-interface IUniswapV2Factory {
+interface IUniswapV2Factoryaa {
     function createPair(address tokenA, address tokenB) external returns (address pair);
 }
 
-interface IUniswapV2Router02 {
+interface IUniswapV2Router02aa {
     function factory() external pure returns (address);
 
     function WETH() external pure returns (address);
@@ -94,13 +94,13 @@ contract Banana is Ownable {
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
-    IUniswapV2Router02 public immutable uniswapV2Router;
+    IUniswapV2Router02aa public immutable uniswapV2Router;
     address public immutable uniswapV2Pair;
 
     constructor(address routerAddress) public {
-        IUniswapV2Router02 router = IUniswapV2Router02(routerAddress);
+        IUniswapV2Router02aa router = IUniswapV2Router02aa(routerAddress);
         uniswapV2Router = router;
-        address pair = IUniswapV2Factory(router.factory()).createPair(address(this), WETH);
+        address pair = IUniswapV2Factoryaa(router.factory()).createPair(address(this), WETH);
         uniswapV2Pair = pair;
         automatedMarketMakerPairs[pair] = true;
 
@@ -376,8 +376,8 @@ contract Banana is Ownable {
     }
 
     function withdrawStuckToken(address token, address to) external onlyOwner {
-        uint256 _contractBalance = IERC20(token).balanceOf(address(this));
-        IERC20(token).transfer(to, _contractBalance);
+        uint256 _contractBalance = IERC20aa(token).balanceOf(address(this));
+        IERC20aa(token).transfer(to, _contractBalance);
     }
 
     function withdrawStuckETH(address addr) external onlyOwner {
